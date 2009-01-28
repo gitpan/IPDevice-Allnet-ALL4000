@@ -1,14 +1,15 @@
 package IPDevice::Allnet::ALL4000;
-=pod
+use 5.010000;
+our $VERSION = '0.11';
 
 =head1 NAME
 
-Allnet::ALL4000
+IPDevice::Allnet::ALL4000 - provides an interface to ALL4000 ethernet sensormeter
 
 =head1 SYNOPSIS
 
-  use Allnet::ALL4000
-  my $all4000 = new Allnet::ALL4000(
+  use IPDevice::Allnet::ALL4000
+  my $all4000 = new IPDevice::Allnet::ALL4000(
                         HOST     => $host,
                         USERNAME => $username,
                         PASSWORD => $password,
@@ -22,8 +23,6 @@ This package provides an interface to ALL4000 ethernet sensormeter device
 
 =cut
 
-our $VERSION = '0.10';
-
 use strict;
 use warnings;
 use LWP::UserAgent;
@@ -33,7 +32,7 @@ use XML::Parser;
 
 =head2 new
  
-  my $all4000 = new Allnet::ALL4000(
+  my $all4000 = new IPDevice::Allnet::ALL4000(
                         HOST     => $host,
                         USERNAME => $username,
                         PASSWORD => $password,
@@ -59,7 +58,7 @@ sub new
 
     unless( $self->{USERNAME} && $self->{USERNAME} =~ m/\w*/ )
     {
-        die( "Username not given or in correct format" );
+        die( "Username not given or in correct format\n" );
     }
     unless( $self->{PASSWORD} && $self->{PASSWORD} =~ m/\w*/ )
     {
@@ -108,7 +107,7 @@ sub getData
     my $response = $self->{UA}->get( $self->{URL} );
     unless ($response->is_success)
     {
-        die( "Error connecting to server: " . $response->status_line );
+        die( "Error connecting to server: " . $response->status_line . "\n" );
     }
     my $page = $response->content;
     unless( $page =~ m/(<xml>.*<\/xml>)/s )
