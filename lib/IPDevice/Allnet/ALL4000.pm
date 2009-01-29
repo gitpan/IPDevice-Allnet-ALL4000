@@ -1,46 +1,12 @@
 package IPDevice::Allnet::ALL4000;
 use 5.010000;
-our $VERSION = '0.11';
-
-=head1 NAME
-
-IPDevice::Allnet::ALL4000 - provides an interface to ALL4000 ethernet sensormeter
-
-=head1 SYNOPSIS
-
-  use IPDevice::Allnet::ALL4000
-  my $all4000 = new IPDevice::Allnet::ALL4000(
-                        HOST     => $host,
-                        USERNAME => $username,
-                        PASSWORD => $password,
-                        PORT     => '80' );
-
-=head1 DESCRIPTION
-
-This package provides an interface to ALL4000 ethernet sensormeter device
-
-=head1 METHODS
-
-=cut
+our $VERSION = '0.12';
 
 use strict;
 use warnings;
 use LWP::UserAgent;
 use XML::Parser;
 
-=pod
-
-=head2 new
- 
-  my $all4000 = new IPDevice::Allnet::ALL4000(
-                        HOST     => $host,
-                        USERNAME => $username,
-                        PASSWORD => $password,
-                        PORT     => '80' );
-
-Makes a new object ready to make requests from the ALL4000 ethernet sensormeter
-
-=cut
 sub new
 {
     my ($class, %args) = @_;
@@ -91,15 +57,6 @@ sub new
     return($self);
 }
 
-=pod
-
-=head2 getData
- 
-  $data = $all4000->getData();
-
-Makes a new request to the server and returns an anonymous hash of all the data points
-
-=cut
 sub getData
 {
     my $self = shift;
@@ -118,15 +75,7 @@ sub getData
     return $self->{DATA};
 }
 
-=pod
 
-=head2 getData
- 
-  $data = $all4000->lastData();
-
-If a getData request was made before, this will return the last data set
-
-=cut
 sub lastData
 {
     my $self = shift;
@@ -167,13 +116,56 @@ __END__
 
 =pod
 
+=head1 NAME
+
+IPDevice::Allnet::ALL4000 - provides an interface to ALL4000 ethernet sensormeter
+
+=head1 SYNOPSIS
+
+  use IPDevice::Allnet::ALL4000
+  my $all4000 = new IPDevice::Allnet::ALL4000(
+                        HOST     => $host,
+                        USERNAME => $username,
+                        PASSWORD => $password,
+                        PORT     => '80' );
+
+All variables are necessary.
+
+=head1 DESCRIPTION
+
+This package provides an interface to ALL4000 ethernet sensormeter device
+
+=head1 METHODS
+
+=head2 new
+ 
+  my $all4000 = new IPDevice::Allnet::ALL4000(
+                        HOST     => $host,
+                        USERNAME => $username,
+                        PASSWORD => $password,
+                        PORT     => '80' );
+
+Makes a new object ready to make requests from the ALL4000 ethernet sensormeter
+
+=head2 getData
+ 
+  $data = $all4000->getData();
+
+Makes a new request to the server and returns an anonymous hash of all the data points.
+
+=head2 lastData
+ 
+  $data = $all4000->lastData();
+
+If a getData request was made before, this will return the last data set, otherwise undef will be returned.
+
 =head1 AUTHOR
 
-Robin Clarke C<robin.clarke@exelution.com>
+Robin Clarke C<rcl@cpan.org>
 
 =head1 LASTMOD
 
-23.01.2009
+28.01.2009
 
 =head1 CREATED
 
