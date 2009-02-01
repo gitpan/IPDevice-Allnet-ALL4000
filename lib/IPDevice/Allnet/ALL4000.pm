@@ -1,6 +1,6 @@
 package IPDevice::Allnet::ALL4000;
 use 5.010000;
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 use strict;
 use warnings;
